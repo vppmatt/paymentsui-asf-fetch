@@ -37,7 +37,7 @@ const Transactions = () => {
         allCountries.indexOf(country) === index
     );
 
-    const [selectedCountry, setSelectedCountry] = useState(uniqueCountries[0]);
+    const [selectedCountry, setSelectedCountry] = useState("none");
 
     
 
@@ -45,7 +45,7 @@ const Transactions = () => {
      ( country => <option key={country} value={country}>{country}</option> );
 
     const displayTransactions = transactions.map ( trans => 
-        (selectedCountry == null || trans.country === selectedCountry) && 
+        (trans.country === selectedCountry) && 
         <TransactionRow key={trans.id} id={trans.id} date ={trans.date} country={trans.country} 
             currency={trans.currency} amount={trans.amount} />
       );
@@ -56,8 +56,8 @@ const Transactions = () => {
     }
 
     return <Fragment>
-        <p >Select country: <select onChange={changeCountry} >
-                <option disabled value =""> all </option>
+        <p >Select country: <select onChange={changeCountry} defaultValue="none" >
+                <option disabled value ="none"> Please select a country </option>
                 {countryOptions}
             </select>
         </p>
