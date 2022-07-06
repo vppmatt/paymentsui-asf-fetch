@@ -1,7 +1,7 @@
-const Menu = () => {
+const Menu = (props) => {
     return <ul className="nav">
-        <li>Find a transaction</li>
-        <li>New Transaction</li>
+        <li style={{cursor: "pointer"}}   onClick={ () => props.setSelectedPage("find")} >Find a transaction</li>
+        <li style={{cursor: "pointer"}} onClick={ () => props.setSelectedPage("new")} >New Transaction</li>
     </ul>
 }
 
