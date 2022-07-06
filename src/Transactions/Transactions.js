@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect } from 'react';
-import { getAllPayments, getAllPaymentsRestVersion } from '../data/DataFunctions';
+import { getAllPayments, getAllPaymentsAxiosVersion, getAllPaymentsRestVersion } from '../data/DataFunctions';
 import TransactionRow from './TransactionRow';
 import './Transactions.css';
 
@@ -8,16 +8,12 @@ const Transactions = () => {
     const [transactions, setTransactions] = useState([]);
     
     const getTransactionsDataFromServer = () => {
-        const paymentsPromise = getAllPaymentsRestVersion();
+        const paymentsPromise = getAllPaymentsAxiosVersion();
         paymentsPromise.then (
             (response) => {
-                if(response.ok) {
-                    response.json().then (
-                        data => {
-                            console.log("got the data")
-                            setTransactions(data);
-                        }
-                    )
+                console.log(response)
+                if(response.status === 200) {
+                    setTransactions(response.data);                    
                 }
                 else {
                     console.log("Something went wrong", response.status);
@@ -35,7 +31,7 @@ const Transactions = () => {
         getTransactionsDataFromServer();
     } , [] );
     
-    debugger;
+    
     const allCountries = transactions.map( transaction => transaction.country);
     const uniqueCountries = allCountries.filter ( (country,index) =>  
         allCountries.indexOf(country) === index
@@ -61,7 +57,7 @@ const Transactions = () => {
 
     return <Fragment>
         <p >Select country: <select onChange={changeCountry} >
-                <option disabled selected> all </option>
+                <option disabled value =""> all </option>
                 {countryOptions}
             </select>
         </p>
