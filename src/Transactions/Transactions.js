@@ -44,7 +44,7 @@ const Transactions = () => {
     const countryOptions = uniqueCountries.map
      ( country => <option key={country} value={country}>{country}</option> );
     
-     debugger;
+     
     const displayTransactions = transactions.map ( trans => 
         (trans.country === selectedCountry) && 
         <TransactionRow key={trans.id} id={trans.id} date ={trans.date} country={trans.country} 
