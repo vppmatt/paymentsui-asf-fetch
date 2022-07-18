@@ -1,7 +1,7 @@
 import { useReducer } from "react";
+import { addNewPayment } from "../data/DataFunctions";
 
 const NewTransaction = () => {
-
 
     const emptyTransaction = { orderId: "", date : new Date().toISOString().slice(0,10) , country: "",
         amount : "", currency: "", taxCode : "", taxRate : "", type : ""}
@@ -19,9 +19,20 @@ const NewTransaction = () => {
     
     const {orderId, date, country, amount, currency, taxCode, taxRate, type} = newTransaction;
 
+    const [message, setMessage] = useState("")
+
 const submitForm = (e) => {
     e.preventDefault();
-    console.log(newTransaction);
+    const response = addNewPayment(newTransaction);
+    response.then ( result => {
+        if (result.status === 200) {
+            setMessage("Payment added with id " + result.data.id)
+        }
+        else {
+            console.log ("something went wrong ", result.statusText)
+        }
+    })
+        .catch (error => console.log ("something went wrong ", error));
 }
 
     return (
@@ -52,6 +63,7 @@ const submitForm = (e) => {
     <input type="text"  id="type" onChange={handleChange} value={type}  />
     <br/>
     <button type="submit">Save</button>
+    <p>{message}</p>
 </form>)
 }
 
