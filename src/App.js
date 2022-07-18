@@ -6,7 +6,7 @@ import Transactions from './Transactions/Transactions';
 import FindATransaction from './Transactions/FindATransaction';
 import NewTransaction from './NewTransactions/NewTransaction';
 import { useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
 
