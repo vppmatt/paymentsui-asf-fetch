@@ -6,17 +6,21 @@ import Transactions from './Transactions/Transactions';
 import FindATransaction from './Transactions/FindATransaction';
 import NewTransaction from './NewTransactions/NewTransaction';
 import { useState } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
 
-  const [selectedPage, setSelectedPage] = useState("find");
 
   return (
+    <BrowserRouter>
     <div className="App">
-      <PageHeader setSelectedPage={setSelectedPage} />
-      {selectedPage === "find" && <FindATransaction />}
-      {selectedPage === "new" && <NewTransaction />}
-    </div>
+      <PageHeader/>
+        <Routes>
+          <Route path="/find" element = {<FindATransaction />} />
+          <Route path="/new" element={<NewTransaction />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
