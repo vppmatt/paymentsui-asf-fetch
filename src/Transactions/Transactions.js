@@ -70,7 +70,8 @@ const Transactions = (props) => {
     const changeCountry = (event) => {
         const selectedCountryIndex =event.target.options.selectedIndex;
         setSelectedCountry(uniqueCountries[selectedCountryIndex-1]);
-        navigate("/find?country=" + uniqueCountries[selectedCountryIndex-1]);
+        setSearchParams({country : uniqueCountries[selectedCountryIndex-1]});
+        //navigate("/find?country=" + uniqueCountries[selectedCountryIndex-1]);
     }
 
     return <Fragment>
