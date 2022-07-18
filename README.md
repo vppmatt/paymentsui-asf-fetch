@@ -5,7 +5,7 @@ This project was bootstrapped with [Create React App](http://githubextra.com/fac
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, you can't run:
 
 ### `npm start`
 
