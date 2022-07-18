@@ -19,8 +19,13 @@ const NewTransaction = () => {
     
     const {orderId, date, country, amount, currency, taxCode, taxRate, type} = newTransaction;
 
+const submitForm = (e) => {
+    e.preventDefault();
+    console.log(newTransaction);
+}
+
     return (
-    <form className="addTransactionsForm">
+    <form className="addTransactionsForm" onSubmit={submitForm} >
     <h2>New transaction</h2>
     <label htmlFor="orderId">Order Id</label>
     <input type="text" id="orderId" onChange={handleChange} value={orderId} />
