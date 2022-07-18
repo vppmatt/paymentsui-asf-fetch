@@ -43,11 +43,12 @@ const Transactions = () => {
 
     const countryOptions = uniqueCountries.map
      ( country => <option key={country} value={country}>{country}</option> );
-
+    
+     debugger;
     const displayTransactions = transactions.map ( trans => 
         (trans.country === selectedCountry) && 
         <TransactionRow key={trans.id} id={trans.id} date ={trans.date} country={trans.country} 
-            currency={trans.currency} amount={trans.amount} />
+            currency={trans.currency} amount={trans.amount} orderId={trans.orderId} />
       );
 
     const changeCountry = (event) => {
@@ -64,7 +65,7 @@ const Transactions = () => {
 
         <table id="transactionsTable" style= {{background: "#ccc"}} className="transactionsTable">
             <thead>
-            <tr><th>Id</th><th>Date</th><th>Country</th><th>Currency</th><th>amount</th></tr>
+            <tr><th>Id</th><th>Order Id</th><th>Date</th><th>Country</th><th>Currency</th><th>amount</th></tr>
             </thead>
             <tbody>
             {displayTransactions}
