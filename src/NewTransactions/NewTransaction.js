@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 import { addNewPayment } from "../data/DataFunctions";
 
 const NewTransaction = () => {
@@ -20,20 +20,28 @@ const NewTransaction = () => {
     const {orderId, date, country, amount, currency, taxCode, taxRate, type} = newTransaction;
 
     const [message, setMessage] = useState("")
+    const [saving, setSaving] = useState(false);
 
-const submitForm = (e) => {
+    const submitForm = (e) => {
     e.preventDefault();
+    setSaving(true);
+    setMessage("please wait - saving")
     const response = addNewPayment(newTransaction);
     response.then ( result => {
         if (result.status === 200) {
             setMessage("Payment added with id " + result.data.id)
         }
         else {
-            console.log ("something went wrong ", result.statusText)
+            setMessage ("something went wrong ", result.statusText)
         }
+        setSaving(false);
     })
-        .catch (error => console.log ("something went wrong ", error));
-}
+        .catch (error => {
+            setMessage("something went wrong ", error)
+            setSaving(false);
+        })
+        
+    }
 
     return (
     <form className="addTransactionsForm" onSubmit={submitForm} >
@@ -62,7 +70,7 @@ const submitForm = (e) => {
     <label htmlFor="type">Type</label>
     <input type="text"  id="type" onChange={handleChange} value={type}  />
     <br/>
-    <button type="submit">Save</button>
+    <button disabled={saving} type="submit">Save</button>
     <p>{message}</p>
 </form>)
 }
