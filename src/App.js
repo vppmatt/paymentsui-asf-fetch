@@ -20,6 +20,7 @@ function App() {
         <Routes>
         
           <Route path="/find" element = {<FindATransaction />} />
+          <Route path="/find/:orderId" element = {<FindATransaction />} />
           <Route path="/new" element={<NewTransaction />} />
           <Route path="/" element={<h1>Welcome to the application</h1>} />
           <Route path="*" element={<PageNotFound />} />  

@@ -1,4 +1,5 @@
 import { Fragment, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import { getAllPaymentsAxiosVersion } from '../data/DataFunctions';
 import TransactionRow from './TransactionRow';
 import './Transactions.css';
@@ -59,9 +60,12 @@ const Transactions = (props) => {
             currency={trans.currency} amount={trans.amount} orderId={trans.orderId} />
       );
 
+      const navigate = useNavigate();
+
     const changeCountry = (event) => {
         const selectedCountryIndex =event.target.options.selectedIndex;
         setSelectedCountry(uniqueCountries[selectedCountryIndex-1]);
+       // navigate("/find&country=" + uniqueCountries[selectedCountryIndex-1]);
     }
 
     return <Fragment>

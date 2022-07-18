@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import './Search.css';
 
 const Search = (props) => {
@@ -7,9 +8,12 @@ const Search = (props) => {
     const [valid, setValid] = useState(false);
     const [touched, setTouched] = useState(false);
 
+    const navigate = useNavigate();
+
     const doSearch = (event) => {
         event.preventDefault();
         props.setSearchTerm(searchTerm.trim());
+        navigate("/find/" + searchTerm.trim());
     }
     
     const handleChange = (event) => {
