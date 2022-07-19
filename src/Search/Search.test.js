@@ -4,6 +4,8 @@ import userEvent from "@testing-library/user-event";
 
 import Search from "./Search";
 
+describe("search tests" , () => {
+
 test( "ensure warning message is not displayed when component first rendered",
     () => {
 
@@ -37,3 +39,5 @@ test( "ensure warning message is displayed when the user has only typed in a spa
 
     }
 )
+
+})
