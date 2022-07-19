@@ -20,6 +20,6 @@ const paymentsReducer = (state = initialState, action) => {
 }
 
 //const store = createStore(paymentsReducer);
-const store = configureStore({reducer : paymentsReducer});
+const paymentsStore = configureStore({reducer : paymentsReducer});
 
-export default store;
+export default paymentsStore;

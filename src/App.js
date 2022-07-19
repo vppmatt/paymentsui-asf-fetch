@@ -8,10 +8,13 @@ import NewTransaction from './NewTransactions/NewTransaction';
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PageNotFound from './PageNotFound';
+import { Provider } from 'react-redux';
+import paymentsStore from './store/store';
 
 function App() {
 
   return (
+    <Provider store={paymentsStore}>
     <BrowserRouter>
     <div className="App">
       
@@ -29,6 +32,7 @@ function App() {
         
       </div>
       </BrowserRouter>
+      </Provider>
   );
 }
 
