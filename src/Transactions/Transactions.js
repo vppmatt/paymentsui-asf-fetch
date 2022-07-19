@@ -1,4 +1,5 @@
 import { Fragment, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
 import { getAllPaymentsAxiosVersion } from '../data/DataFunctions';
@@ -8,25 +9,46 @@ import './Transactions.css';
 const Transactions = (props) => {
 
     const [transactions, setTransactions] = useState([]);
+
+    const dispatch = useDispatch();
+    const transactionsInRedux = useSelector( state => state.transactions);
+    const lastFetchInRedux = useSelector( state => state.lastFetch);
     
     const getTransactionsDataFromServer = () => {
-        const paymentsPromise = getAllPaymentsAxiosVersion();
-        paymentsPromise.then (
-            (response) => {
-                console.log(response)
-                if(response.status === 200) {
-                    setTransactions(response.data);                    
+
+        let timedifference = 999999;
+        if (lastFetchInRedux != null) {
+            const now = new Date();
+            timedifference = now.getTime() - lastFetchInRedux;
+        }
+        console.log("timedifference", timedifference)
+
+        if (transactionsInRedux.length > 0  && timedifference < 60000) {
+            setTransactions(transactionsInRedux);
+            console.log("got the transactions from redux");
+        }
+        else {
+            const paymentsPromise = getAllPaymentsAxiosVersion();
+            console.log("getting the transactions from redux");
+            paymentsPromise.then (
+                (response) => {
+                    console.log(response)
+                    if(response.status === 200) {
+                        setTransactions(response.data);    
+                        dispatch ( { type : "save-transactions" , value :response.data } );
+                    }
+                    else {
+                        console.log("Something went wrong", response.status);
+                    }
                 }
-                else {
-                    console.log("Something went wrong", response.status);
+            
+            )
+            .catch (
+                (error) => {
+                    console.log("Server error", error);
                 }
-            }
-        )
-        .catch (
-            (error) => {
-                console.log("Server error", error);
-            }
-        );
+            );
+        }
     };
 
     useEffect( () => {
