@@ -1,6 +1,6 @@
-import { createStore, configureStore } from "redux";
+import { configureStore } from '@reduxjs/toolkit'
 
-const initialState = { countries : [] , lastFetch : null , userName:""};
+const initialState = { countries : [] , lastFetch : null , userName:"Matt"};
 
 const paymentsReducer = (state = initialState, action) => {
     // {type : "clear-down"}   - remove all data back to initial state
@@ -19,7 +19,10 @@ const paymentsReducer = (state = initialState, action) => {
 
 }
 
+// npm install redux react-redux
 //const store = createStore(paymentsReducer);
+
+// npm install @reduxjs/toolkit react-redux
 const paymentsStore = configureStore({reducer : paymentsReducer});
 
 export default paymentsStore;
