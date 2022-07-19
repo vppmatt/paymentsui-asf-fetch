@@ -26,9 +26,14 @@ test( "ensure warning message is displayed when the user has only typed in a spa
         //WHEN
             const orderIdInput = screen.getByLabelText("Order Id:");
             userEvent.type(orderIdInput, " ");
+
+            const submitButton = screen.queryByRole("button");
+
         //THEN
-            const messageParagraph = screen.queryByText("Please enter a valid order id");
+            const messageParagraph = screen.queryByText("Please enter a valid order id", {exact : true});
             //we expect the message is present
             expect(messageParagraph).toBeInTheDocument();
+            expect(orderIdInput).toHaveValue(" ");
+
     }
 )

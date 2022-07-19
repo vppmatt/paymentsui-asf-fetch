@@ -35,7 +35,7 @@ const Search = (props) => {
             <label htmlFor="orderId"  >Order Id:</label>
             <input onChange={handleChange} value={searchTerm} id="orderId" type="text" />
             <button type="submit" disabled={!valid} >Search</button>
-            {touched && !valid && <p style={{color: "#f00", "font-size": "12px", "margin-top": 0}}>Please enter a valid order id</p>}
+            {touched && !valid && <p style={{color: "#f00", "fontSize": "12px", "marginTop": 0}}>Please enter a valid order id</p>}
         </form>
     </div>
 

@@ -45,7 +45,7 @@ const NewTransaction = () => {
 
     return (
     <form className="addTransactionsForm" onSubmit={submitForm} >
-    <h2>New transaction</h2>
+    <h2 data-testId="h2">New Transaction</h2>
     <label htmlFor="orderId">Order Id</label>
     <input type="text" id="orderId" onChange={handleChange} value={orderId} />
     <br/>
