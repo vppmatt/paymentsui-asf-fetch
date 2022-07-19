@@ -75,10 +75,13 @@ const Transactions = (props) => {
     }
 
     return <Fragment>
-        <p >Select country: <select onChange={changeCountry} defaultValue="none" >
+        
+        <p >{ countryOptions.length > 0 &&
+            <select onChange={changeCountry} defaultValue="none" >
                 <option disabled value ="none"> Please select a country </option>
                 {countryOptions}
             </select>
+            }
         </p>
 
         <table id="transactionsTable" style= {{background: "#ccc"}} className="transactionsTable">
